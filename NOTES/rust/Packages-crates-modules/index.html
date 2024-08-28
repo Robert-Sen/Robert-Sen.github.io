@@ -1,0 +1,1515 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Robert-Sen's website">
+      
+      
+        <meta name="author" content="Robert Sen">
+      
+      
+        <link rel="canonical" href="https://Robert-Sen.github.io/NOTES/rust/Packages-crates-modules/">
+      
+      
+        <link rel="prev" href="../Enum/">
+      
+      
+        <link rel="next" href="../Collections/">
+      
+      
+      <link rel="icon" href="../../../images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
+    
+    
+      
+        <title>Package, creates and module - Robert-Sen's website</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Luxurious+Roman:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Luxurious Roman";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#crate" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Robert-Sen&#39;s website" class="md-header__button md-logo" aria-label="Robert-Sen's website" data-md-component="logo">
+      
+  <img src="../../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robert-Sen's website
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Package, creates and module
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ESSAY/" class="md-tabs__link">
+          
+  
+    
+  
+  ESSAY
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+    
+  
+  Notes
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DEV/" class="md-tabs__link">
+          
+  
+    
+  
+  Dev
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ABOUT/" class="md-tabs__link">
+          
+  
+    
+  
+  About
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Robert-Sen&#39;s website" class="md-nav__button md-logo" aria-label="Robert-Sen's website" data-md-component="logo">
+      
+  <img src="../../../images/logo.png" alt="logo">
+
+    </a>
+    Robert-Sen's website
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../ESSAY/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    ESSAY
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Notes
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Notes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    
+  
+  
+    <a href="../../OS/Xv6/Filesystem/Filesystem_Hierachy/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    OS
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    rust
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            rust
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cargo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    cargo
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Basic-syntax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ownership/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ownership
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Structs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Struct
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Enum/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enum
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Package, creates and module
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Package, creates and module
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#crate" class="md-nav__link">
+    <span class="md-ellipsis">
+      包和 Crate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="包和 Crate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crate_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      crate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#package" class="md-nav__link">
+    <span class="md-ellipsis">
+      package
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义模块来控制作用域与私有性
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="定义模块来控制作用域与私有性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      模块规则
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      在模块中对相关代码进行分组
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      引用模块项目的路径
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="引用模块项目的路径">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pub" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用 pub 关键字暴露路径
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#super" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用 super 起始的关键字
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      结构体和枚举
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use" class="md-nav__link">
+    <span class="md-ellipsis">
+      use 使用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="use 使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#as" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用 as 关键字提供新的名称
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pub-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用 pub use 重导出名称
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      嵌套路径来消除大量的 use 行
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glob" class="md-nav__link">
+    <span class="md-ellipsis">
+      glob 运算符
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Collections/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Collection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Error-handling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Error handling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../DEV/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Dev
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../ABOUT/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#crate" class="md-nav__link">
+    <span class="md-ellipsis">
+      包和 Crate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="包和 Crate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crate_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      crate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#package" class="md-nav__link">
+    <span class="md-ellipsis">
+      package
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义模块来控制作用域与私有性
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="定义模块来控制作用域与私有性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      模块规则
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      在模块中对相关代码进行分组
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      引用模块项目的路径
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="引用模块项目的路径">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pub" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用 pub 关键字暴露路径
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#super" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用 super 起始的关键字
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      结构体和枚举
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use" class="md-nav__link">
+    <span class="md-ellipsis">
+      use 使用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="use 使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#as" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用 as 关键字提供新的名称
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pub-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用 pub use 重导出名称
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      嵌套路径来消除大量的 use 行
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glob" class="md-nav__link">
+    <span class="md-ellipsis">
+      glob 运算符
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Package, creates and module</h1>
+
+<h2 id="crate">包和 Crate<a class="headerlink" href="#crate" title="Permanent link">&para;</a></h2>
+<h3 id="crate_1">crate<a class="headerlink" href="#crate_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>crate 是 Rust 在编译时最小的代码单位。</li>
+<li>单个 <code>.rs</code> 文件可以看作一个 crate 。</li>
+<li>crate 可以包含模块，模块可以定义在其他文件，然后和 crate 一起编译。  </li>
+</ul>
+<p>crate 有两类：   </p>
+<ol>
+<li>二进制项<br />
+  二进制项 可以被编译为可执行程序，比如一个命令行程序或者一个服务器。它们必须有一个 <code>main</code> 函数来定义当程序被执行的时候所需要做的事情。</li>
+<li>库<br />
+  库 并没有 main 函数，它们也不会编译为可执行程序，它们提供一些诸如函数之类的东西，使其他项目也能使用这些东西。</li>
+</ol>
+<p>crate root 是一个源文件，Rust 编译器以它为起始点，并构成你的 crate 的根模块  </p>
+<h3 id="package">package<a class="headerlink" href="#package" title="Permanent link">&para;</a></h3>
+<ul>
+<li>包（package） 是提供一系列功能的一个或者多个 crate。一个包会包含一个 Cargo.toml 文件，阐述如何去构建这些 crate。Cargo 就是一个包含构建你代码的二进制项的包。</li>
+<li>包中至少包含一个 crate, 但至多包含一个库 crate(library crate)。</li>
+</ul>
+<p>当我们执行如下命令时：
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1">$ cargo new my-project
+</span><span id="__span-0-2">     Created binary (application) `my-project` package
+</span><span id="__span-0-3">$ ls my-project
+</span><span id="__span-0-4">Cargo.toml
+</span><span id="__span-0-5">src
+</span><span id="__span-0-6">$ ls my-project/src
+</span><span id="__span-0-7">main.rs
+</span></code></pre></div>
+在此，我们有了一个只包含 src/main.rs 的包，意味着它只含有一个名为 my-project 的二进制 crate。<br />
+如果一个包同时含有 src/main.rs 和 src/lib.rs，则它有两个 crate：一个二进制的和一个库的，且名字都与包相同。<br />
+通过将文件放在 src/bin 目录下，一个包可以拥有多个二进制 crate：每个 src/bin 下的文件都会被编译成一个独立的二进制 crate。</p>
+<h2 id="_1">定义模块来控制作用域与私有性<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">模块规则<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>从crate根节点开始: 当编译一个crate, 编译器首先在crate根文件（通常，对于一个库crate而言是src/lib.rs，对于一个二进制crate而言是src/main.rs）中寻找需要被编译的代码。</li>
+<li>声明模块: 在crate根文件中，你可以声明一个新模块；比如，你用mod garden声明了一个叫做garden的模块。编译器会在下列路径中寻找模块代码：<ul>
+<li>内联，在大括号中，当mod garden后方不是一个分号而是一个大括号</li>
+<li>在文件 src/garden.rs</li>
+<li>在文件 src/garden/mod.rs</li>
+</ul>
+</li>
+<li>声明子模块: 在除了crate根节点以外的其他文件中，你可以定义子模块。比如，你可能在src/garden.rs中定义了mod vegetables;。编译器会在以父模块命名的目录中寻找子模块代码：<ul>
+<li>内联, 在大括号中，当mod vegetables后方不是一个分号而是一个大括号</li>
+<li>在文件 src/garden/vegetables.rs</li>
+<li>在文件 src/garden/vegetables/mod.rs</li>
+</ul>
+</li>
+<li>模块中的代码路径: 一旦一个模块是你crate的一部分， 你可以在隐私规则允许的前提下，从同一个crate内的任意地方，通过代码路径引用该模块的代码。举例而言，一个garden vegetables模块下的Asparagus类型可以在crate::garden::vegetables::Asparagus被找到。</li>
+<li>私有 vs 公用: 一个模块里的代码默认对其父模块私有。为了使一个模块公用，应当在声明时使用pub mod替代mod。为了使一个公用模块内部的成员公用，应当在声明前使用pub。</li>
+<li>use 关键字: 在一个作用域内，use关键字创建了一个成员的快捷方式，用来减少长路径的重复。在任何可以引用crate::garden::vegetables::Asparagus的作用域, 你可以通过 use crate::garden::vegetables::Asparagus;创建一个快捷方式，然后你就可以在作用域中只写Asparagus来使用该类型。</li>
+</ul>
+<p>下面创建一个名为 <code>backyard</code> 的 crate 来说明这些规则。<br />
+这是文件目录树：<br />
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1">backyard
+</span><span id="__span-1-2">├── Cargo.lock
+</span><span id="__span-1-3">├── Cargo.toml
+</span><span id="__span-1-4">└── src
+</span><span id="__span-1-5">    ├── garden
+</span><span id="__span-1-6">    │   └── vegetables.rs
+</span><span id="__span-1-7">    ├── garden.rs
+</span><span id="__span-1-8">    └── main.rs
+</span></code></pre></div>
+文件名：src/main.rs
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-2-1"><span class="k">use</span><span class="w"> </span><span class="k">crate</span><span class="p">::</span><span class="n">garden</span><span class="p">::</span><span class="n">vegetables</span><span class="p">::</span><span class="n">Asparagus</span><span class="p">;</span>
+</span><span id="__span-2-2">
+</span><span id="__span-2-3"><span class="k">pub</span><span class="w"> </span><span class="k">mod</span><span class="w"> </span><span class="nn">garden</span><span class="p">;</span>
+</span><span id="__span-2-4">
+</span><span id="__span-2-5"><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-6"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">plant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Asparagus</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-7"><span class="w">    </span><span class="n">weigth</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="p">,</span>
+</span><span id="__span-2-8"><span class="w">  </span><span class="p">};</span>
+</span><span id="__span-2-9"><span class="w">  </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;I&#39;m growing {:?}!&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plant</span><span class="p">);</span>
+</span><span id="__span-2-10"><span class="p">}</span>
+</span></code></pre></div>
+文件名：src/garden.rs
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-3-1"><span class="k">pub</span><span class="w"> </span><span class="k">mod</span><span class="w"> </span><span class="nn">vegetables</span><span class="p">;</span>
+</span></code></pre></div>
+文件名：src/garden/vegetables.rs
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-4-1"><span class="cp">#[derive(Debug)]</span>
+</span><span id="__span-4-2"><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Asparagus</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-3"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="n">weigth</span><span class="p">:</span><span class="w"> </span><span class="kt">f64</span><span class="p">,</span>
+</span><span id="__span-4-4"><span class="p">}</span>
+</span></code></pre></div></p>
+<h3 id="_3">在模块中对相关代码进行分组<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>背景：<br />
+在餐饮业，餐馆中会有一些地方被称之为 前台（front of house），还有另外一些地方被称之为 后台（back of house）。前台是招待顾客的地方，在这里，店主可以为顾客安排座位，服务员接受顾客下单和付款，调酒师会制作饮品。后台则是由厨师工作的厨房，洗碗工的工作地点，以及经理做行政工作的地方组成。<br />
+文件名：src/lib.rs
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-5-1"><span class="k">mod</span><span class="w"> </span><span class="nn">front_of_house</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-2"><span class="w">    </span><span class="k">mod</span><span class="w"> </span><span class="nn">hosting</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-3"><span class="w">        </span><span class="k">fn</span><span class="w"> </span><span class="nf">add_to_waitlist</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+</span><span id="__span-5-4">
+</span><span id="__span-5-5"><span class="w">        </span><span class="k">fn</span><span class="w"> </span><span class="nf">seat_at_table</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+</span><span id="__span-5-6"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-7">
+</span><span id="__span-5-8"><span class="w">    </span><span class="k">mod</span><span class="w"> </span><span class="nn">serving</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-9"><span class="w">        </span><span class="k">fn</span><span class="w"> </span><span class="nf">take_order</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+</span><span id="__span-5-10">
+</span><span id="__span-5-11"><span class="w">        </span><span class="k">fn</span><span class="w"> </span><span class="nf">serve_order</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+</span><span id="__span-5-12">
+</span><span id="__span-5-13"><span class="w">        </span><span class="k">fn</span><span class="w"> </span><span class="nf">take_payment</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+</span><span id="__span-5-14"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-15"><span class="p">}</span>
+</span></code></pre></div></p>
+<p>模块树：
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1">crate
+</span><span id="__span-6-2"> └── front_of_house
+</span><span id="__span-6-3">     ├── hosting
+</span><span id="__span-6-4">     │   ├── add_to_waitlist
+</span><span id="__span-6-5">     │   └── seat_at_table
+</span><span id="__span-6-6">     └── serving
+</span><span id="__span-6-7">         ├── take_order
+</span><span id="__span-6-8">         ├── serve_order
+</span><span id="__span-6-9">         └── take_payment
+</span></code></pre></div></p>
+<h2 id="_4">引用模块项目的路径<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>路径有两种形式：</p>
+<ul>
+<li>绝对路径（absolute path）从 crate 根开始，以 crate 名或者字面值 crate 开头。</li>
+<li>相对路径（relative path）从当前模块开始，以 self、super 或当前模块的标识符开头。</li>
+</ul>
+<p>例如：
+文件名：src/lib.rs
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-7-1"><span class="k">mod</span><span class="w"> </span><span class="nn">front_of_house</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-2"><span class="w">    </span><span class="k">mod</span><span class="w"> </span><span class="nn">hosting</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-3"><span class="w">        </span><span class="k">fn</span><span class="w"> </span><span class="nf">add_to_waitlist</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+</span><span id="__span-7-4"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-7-5"><span class="p">}</span>
+</span><span id="__span-7-6">
+</span><span id="__span-7-7"><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">eat_at_restaurant</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-8"><span class="w">    </span><span class="c1">// 绝对路径</span>
+</span><span id="__span-7-9"><span class="w">    </span><span class="k">crate</span><span class="p">::</span><span class="n">front_of_house</span><span class="p">::</span><span class="n">hosting</span><span class="p">::</span><span class="n">add_to_waitlist</span><span class="p">();</span>
+</span><span id="__span-7-10">
+</span><span id="__span-7-11"><span class="w">    </span><span class="c1">// 相对路径</span>
+</span><span id="__span-7-12"><span class="w">    </span><span class="n">front_of_house</span><span class="p">::</span><span class="n">hosting</span><span class="p">::</span><span class="n">add_to_waitlist</span><span class="p">();</span>
+</span><span id="__span-7-13"><span class="p">}</span>
+</span></code></pre></div></p>
+<h3 id="pub">使用 pub 关键字暴露路径<a class="headerlink" href="#pub" title="Permanent link">&para;</a></h3>
+<p>上述代码无法通过编译，原因是模块 <code>front_of_house</code> 下的 <code>hosting</code> 模块默认是私有的，并且 <code>add_to_waitlist</code> 函数默认也是私有的，我们需要在其前面添加 <code>pub</code> 关键字，使其变成公有的。
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-8-1"><span class="k">mod</span><span class="w"> </span><span class="nn">front_of_house</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-2"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">mod</span><span class="w"> </span><span class="nn">hosting</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-3"><span class="w">        </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">add_to_waitlist</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+</span><span id="__span-8-4"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-5"><span class="p">}</span>
+</span><span id="__span-8-6">
+</span><span id="__span-8-7"><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">eat_at_restaurant</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-8"><span class="w">    </span><span class="c1">// 绝对路径</span>
+</span><span id="__span-8-9"><span class="w">    </span><span class="k">crate</span><span class="p">::</span><span class="n">front_of_house</span><span class="p">::</span><span class="n">hosting</span><span class="p">::</span><span class="n">add_to_waitlist</span><span class="p">();</span>
+</span><span id="__span-8-10">
+</span><span id="__span-8-11"><span class="w">    </span><span class="c1">// 相对路径</span>
+</span><span id="__span-8-12"><span class="w">    </span><span class="n">front_of_house</span><span class="p">::</span><span class="n">hosting</span><span class="p">::</span><span class="n">add_to_waitlist</span><span class="p">();</span>
+</span><span id="__span-8-13"><span class="p">}</span>
+</span></code></pre></div></p>
+<h3 id="super">使用 super 起始的关键字<a class="headerlink" href="#super" title="Permanent link">&para;</a></h3>
+<p>类似于文件系统中以 <code>..</code> 开头的语法。</p>
+<h3 id="_5">结构体和枚举<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>结构体中的成员默认私有。  </li>
+<li>枚举中的成员默认共有。</li>
+</ul>
+<h2 id="use">use 使用<a class="headerlink" href="#use" title="Permanent link">&para;</a></h2>
+<p><code>use</code> 关键字可以将指定路径引入作用域（scope），然后就可以直接调用路径中的项。<br />
+使用 use 引入结构体、枚举和其他项时，习惯是指定它们的完整路径。例如：
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-9-1"><span class="k">use</span><span class="w"> </span><span class="n">std</span><span class="p">::</span><span class="n">collections</span><span class="p">::</span><span class="n">HashMap</span><span class="p">;</span>
+</span><span id="__span-9-2">
+</span><span id="__span-9-3"><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-4"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HashMap</span><span class="p">::</span><span class="n">new</span><span class="p">();</span>
+</span><span id="__span-9-5"><span class="w">    </span><span class="n">map</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+</span><span id="__span-9-6"><span class="p">}</span>
+</span></code></pre></div></p>
+<h3 id="as">使用 as 关键字提供新的名称<a class="headerlink" href="#as" title="Permanent link">&para;</a></h3>
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-10-1"><span class="k">use</span><span class="w"> </span><span class="n">std</span><span class="p">::</span><span class="n">fmt</span><span class="p">::</span><span class="nb">Result</span><span class="p">;</span>
+</span><span id="__span-10-2"><span class="k">use</span><span class="w"> </span><span class="n">std</span><span class="p">::</span><span class="n">io</span><span class="p">::</span><span class="nb">Result</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">IoResult</span><span class="p">;</span>
+</span><span id="__span-10-3">
+</span><span id="__span-10-4"><span class="k">fn</span><span class="w"> </span><span class="nf">function1</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-5"><span class="w">    </span><span class="c1">// --snip--</span>
+</span><span id="__span-10-6"><span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
+</span><span id="__span-10-7"><span class="p">}</span>
+</span><span id="__span-10-8">
+</span><span id="__span-10-9"><span class="k">fn</span><span class="w"> </span><span class="nf">function2</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">IoResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-10"><span class="w">    </span><span class="c1">// --snip--</span>
+</span><span id="__span-10-11"><span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
+</span><span id="__span-10-12"><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="pub-use">使用 pub use 重导出名称<a class="headerlink" href="#pub-use" title="Permanent link">&para;</a></h3>
+<p>通过 pub use 使名称可从新作用域中被导入至任何代码。
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-11-1"><span class="k">mod</span><span class="w"> </span><span class="nn">front_of_house</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-2"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">mod</span><span class="w"> </span><span class="nn">hosting</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-3"><span class="w">        </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">add_to_waitlist</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+</span><span id="__span-11-4"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-11-5"><span class="p">}</span>
+</span><span id="__span-11-6">
+</span><span id="__span-11-7"><span class="k">pub</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span><span class="p">::</span><span class="n">front_of_house</span><span class="p">::</span><span class="n">hosting</span><span class="p">;</span>
+</span><span id="__span-11-8">
+</span><span id="__span-11-9"><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">eat_at_restaurant</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-10"><span class="w">    </span><span class="n">hosting</span><span class="p">::</span><span class="n">add_to_waitlist</span><span class="p">();</span>
+</span><span id="__span-11-11"><span class="w">    </span><span class="n">hosting</span><span class="p">::</span><span class="n">add_to_waitlist</span><span class="p">();</span>
+</span><span id="__span-11-12"><span class="w">    </span><span class="n">hosting</span><span class="p">::</span><span class="n">add_to_waitlist</span><span class="p">();</span>
+</span><span id="__span-11-13"><span class="p">}</span>
+</span></code></pre></div></p>
+<h3 id="use_1">嵌套路径来消除大量的 use 行<a class="headerlink" href="#use_1" title="Permanent link">&para;</a></h3>
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-12-1"><span class="c1">// --snip--</span>
+</span><span id="__span-12-2"><span class="k">use</span><span class="w"> </span><span class="n">std</span><span class="p">::{</span><span class="n">cmp</span><span class="p">::</span><span class="n">Ordering</span><span class="p">,</span><span class="w"> </span><span class="n">io</span><span class="p">};</span>
+</span><span id="__span-12-3"><span class="c1">// --snip--</span>
+</span></code></pre></div>
+<h3 id="glob">glob 运算符<a class="headerlink" href="#glob" title="Permanent link">&para;</a></h3>
+<p>如果希望将一个路径下 所有 公有项引入作用域，可以指定路径后跟 *，glob 运算符：
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-13-1"><span class="k">use</span><span class="w"> </span><span class="n">std</span><span class="p">::</span><span class="n">collections</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+</span></code></pre></div></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 - 2024 Robert Sen
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/Robert-Sen" target="_blank" rel="noopener" title="Github | Robert-Sen" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.indexes", "navigation.prune", "navigation.top", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.af256bd8.min.js"></script>
+      
+        <script src="../../../javascripts/shortcuts.js"></script>
+      
+    
+  </body>
+</html>
